@@ -6,8 +6,8 @@ public class UI {
 	boolean Quit = false;
 	boolean Exit = false;
 	GradeSystems aGradeSystem;
-	String ID;
-	String cmd;
+	String ID = "";
+	String cmd = "";
 	Scanner sc=new Scanner(System.in);
 	public UI() throws NoSuchIDExceptions, NoSuchCommandExceptions, FileNotFoundException{
 		/*TODO
@@ -26,6 +26,23 @@ public class UI {
 		 *  end try
 		 *  finally {}
 		 */
+		 
+		try {
+		aGradeSystem = new GradeSystems(scanner);
+		while (true) {
+				String ID = promptID();
+				if (ID.equals("Q"))
+				break;
+				else if (checkID(ID)) {
+						showWelcomeMsg();
+						promptCommand();
+				} else
+						throw new NoSuchIDExceptions();
+				}
+				showFinishMsg();
+		} finally {
+		}
+		}		 
 	}
 	
 	private void promptCommand() throws NoSuchCommandExceptions {
@@ -45,42 +62,42 @@ public class UI {
 		 *end class UI
 		 * 
 		 */
-		   			
-		
+		  switch (cmd) {
+				case 'G':
+						aGradeSystem.showGrade(ID);
+				break;
+				case 'R':
+						aGradeSystem.showRank(ID);
+				break;
+				case 'W':
+				aGradeSystem.updateWeights();
+				break;
+				case 'Q':	
+				default:
+				System.out.println("指令錯了!");
+				System.exit(0);	
 		
 	}
 
 	private void showWelcomeMsg() {
-		/*TODO
-		 * 顯示歡迎訊息
-		 * 
-		 * 
-		 */
+		System.out.println("Welcome "+ aGradeSystem.currentname + "!");
 	}
 
 	private void showFinishMsg() {
-		/*TODO
-		 * 顯示離開訊息
-		 * 
-		 */
+		System.out.println("結束");	
 	}
 	
 	private boolean checkID(String ID)throws NoSuchIDExceptions {
-			/*TODO
-			 * 確認ID是否存在
-			 * 
-			 */
-			return true;
+			if(containsID(ID)){
+					return true;
+			}else
+					return false;			
 	}
 	
 	public void promptID() {
 		System.out.print("輸入ID或 Q (結束使用)？");
-		/*TODO
-		 * 取得ID或Q離開
-		 * 
-		 * 
-		 * 
-		 */
+		String idTmp = sc.next();
+		return idTmp;
 		
 	}
 
