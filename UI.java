@@ -10,23 +10,7 @@ public class UI {
 	String cmd = "";
 	Scanner sc=new Scanner(System.in);
 	public UI() throws NoSuchIDExceptions, NoSuchCommandExceptions, FileNotFoundException{
-		/*TODO
-		 * try 
-		 * 1.call GradeSystems() to build "aGradeSystem"
-		 * 2.loop1 until Q (Quit)
-		 * 2.1.	promptID() to get user ID  輸入ID或 Q (結束使用)？ 
-		 * 2.2.	checkID (ID) 看 ID 是否在 aGradeSystem內
-		 * 2.3.	showWelcomeMsg (ID)      ex. Welcome李威廷
-		 * 2.4.	loop2 until E (Exit)
-		 * 			promptCommand() to prompt for inputCommand 
-		 *  	end loop2
-		 * end loop1
-		 *  
-		 * 3.showFinishMsg()           結束了
-		 *  end try
-		 *  finally {}
-		 */
-		 
+		
 	try {
 		aGradeSystem = new GradeSystems();
 		while (true) {
@@ -35,7 +19,7 @@ public class UI {
 				showFinishMsg();
 				break;
 			}
-			else if (checkID(ID)) {
+			else if (aGradeSystem.checkID(ID)==true) {
 				showWelcomeMsg();
 				promptCommand();
 			} 
@@ -53,16 +37,7 @@ public class UI {
 		System.out.println("\t\t4) E 離開選單 (Exit)");
 		
 		cmd=sc.next();
-		/*TODO
-		 * 取得輸入指令
-		 * 1. prompt user for inputCommand
-		 * 2. if inputCommand is not G (Grade),R (Rank), W (Weights), or E (Exit),
-		 * 		throws an object of NoSuchCommandException
-		 * 3. if inputCommand is E (Exit) then break
-		 * 		else: G aGradeSystem.showGrade(ID), R showRank(ID), W updateWeights() end if
-		 *end class UI
-		 * 
-		 */
+
 		  switch (cmd.charAt(0)) {
 				case 'G':
 					aGradeSystem.showGrade(ID);
@@ -82,18 +57,11 @@ public class UI {
 	}
 
 	private void showWelcomeMsg() {
-		System.out.println("Welcome "+ aGradeSystem.currentname + "!");
+		System.out.println("Welcome "+ aGradeSystem.getcurrentname(ID) + "!");
 	}
 
 	private void showFinishMsg() {
 		System.out.println("結束");	
-	}
-	
-	private boolean checkID(String ID)throws NoSuchIDExceptions {
-		if(aGradeSystem.containsID(ID)){
-			return true;
-		}else
-		return false;			
 	}
 	
 	public String promptID() {
