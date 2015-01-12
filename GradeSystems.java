@@ -6,9 +6,9 @@ import java.util.Scanner;
 public class GradeSystems {
 	static double[] weights=new double[]{0.1,0.1,0.1,0.3,0.4};
 	
-	String[][] alist;
+	String[][] alist = new String[100][8];
 	int index=0;
-	String currentname="";
+	
 	public GradeSystems() throws FileNotFoundException {
 		File file = new File("gradeInput.txt");
 		Scanner sc=new Scanner(file);
@@ -17,11 +17,11 @@ public class GradeSystems {
 			Scanner sc1=new Scanner(line);
 			alist[index][0]=sc1.next();
 			alist[index][1]=sc1.next();
-			alist[index][2]=String.valueOf(sc.nextInt());
-			alist[index][3]=String.valueOf(sc.nextInt());
-			alist[index][4]=String.valueOf(sc.nextInt());
-			alist[index][5]=String.valueOf(sc.nextInt());
-			alist[index][6]=String.valueOf(sc.nextInt());
+			alist[index][2]=sc1.next();
+			alist[index][3]=sc1.next();
+			alist[index][4]=sc1.next();
+			alist[index][5]=sc1.next();
+			alist[index][6]=sc1.next();
 			alist[index][7]=String.valueOf(calculateTotalGrade(weights, alist[index][2], alist[index][3], alist[index][4], alist[index][5], alist[index][6]));
 			index=index+1;
 		}
@@ -32,6 +32,16 @@ public class GradeSystems {
 		return result;
 	}
 
+	public String getcurrentname(String ID){
+		String ret = "";
+		for(int i=0; i<index; i++){
+			if(ID==alist[i][0]){
+				ret=alist[i][0];
+			}
+		}
+		return ret;
+	}
+	
 	public void showGrade(String ID){
 		int lindex=Integer.valueOf(ID);
 		System.out.println(alist[lindex][1]+"成績:");
@@ -53,7 +63,7 @@ public class GradeSystems {
 			 }
 		 }
 		 
-		 System.out.println(currentname+"排名第"+rank);
+		 System.out.println(getcurrentname(ID)+"排名第"+rank);
 		 return rank;
 	}
 	
@@ -112,7 +122,7 @@ public class GradeSystems {
 	}
 
 
-	public boolean containsID(String ID) {
+	public boolean checkID(String ID) {
 		boolean result=false;
 		for(int i=0; i<index; i++){
 			String icom=alist[i][0];
