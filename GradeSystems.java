@@ -126,8 +126,9 @@ public class GradeSystems {
 		boolean result=false;
 		for(int i=0; i<index; i++){
 			String icom=alist[i][0];
-			if(ID==icom){
-				result=true;
+			if(ID.equals(icom)){				
+				result = true;
+				break;
 			}
 		}
 		return result;
