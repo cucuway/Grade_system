@@ -61,18 +61,27 @@ public class GradeSystems {
 		}
 	}
 	
-	public int showRank(String ID){
-		int rank=1;
-		 int crank=Integer.valueOf(alist[Integer.valueOf(ID)][7]);
-		 for(int i=0; i<index; i++){
-			 int crank2=Integer.valueOf(alist[i][7]);
-			 if(crank<crank2){
-				 rank=rank+1;
+	public void showRank(String ID){
+		int rank = 1;
+		String crank = "";
+		
+		for(int i=0; i<index; i++){			//找出使用者的成績
+			String tmpID = alist[i][0];
+			if(ID.equals(tmpID)){		
+				crank = alist[i][7];
+			}
+		}
+			
+		for(int j=0; j<index; j++){			//逐一比較成績
+			String crank2 = alist[j][7];
+			if(crank.compareTo(crank2) < 0){
+				System.out.println(crank + ">" + crank2);
+				rank++; //預設為第一名，分數小於一人就後退一個名次。
 			 }
 		 }
-		 
+		
 		 System.out.println(getcurrentname(ID)+"排名第"+rank);
-		 return rank;
+		 return ;
 	}
 	
 	public void updateWeights (){
