@@ -33,24 +33,32 @@ public class GradeSystems {
 	}
 
 	public String getcurrentname(String ID){
-		String ret = "";
+		String ret = "Jack", tmp = ID;
+		
 		for(int i=0; i<index; i++){
-			if(ID==alist[i][0]){
-				ret=alist[i][0];
+			String icom = alist[i][0];
+//			System.out.println(i + " " + tmp + " " + icom + ". ");
+			if(ID.equals(icom)){
+				ret = alist[i][1];
+				break;
 			}
 		}
 		return ret;
 	}
 	
 	public void showGrade(String ID){
-		int lindex=Integer.valueOf(ID);
-		System.out.println(alist[lindex][1]+"成績:");
-		System.out.println("lab1:        "+alist[lindex][2]);
-		System.out.println("lab2:        "+alist[lindex][3]);
-		System.out.println("lab3:        "+alist[lindex][4]);
-		System.out.println("mid-term:   "+alist[lindex][5]);
-		System.out.println("final exam:  "+alist[lindex][6]);
-		System.out.println("total grade:"+alist[lindex][7]);
+		for(int i=0; i<index; i++){
+			String tmpID = alist[i][0];
+			if(ID.equals(tmpID)){		
+				System.out.println(alist[i][1]+"成績:");
+				System.out.println("lab1:        "+alist[i][2]);
+				System.out.println("lab2:        "+alist[i][3]);
+				System.out.println("lab3:        "+alist[i][4]);
+				System.out.println("mid-term:   "+alist[i][5]);
+				System.out.println("final exam:  "+alist[i][6]);
+				System.out.println("total grade:"+alist[i][7]);
+			}
+		}
 	}
 	
 	public int showRank(String ID){
