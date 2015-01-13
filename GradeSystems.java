@@ -75,7 +75,7 @@ public class GradeSystems {
 		for(int j=0; j<index; j++){			//逐一比較成績
 			String crank2 = alist[j][7];
 			if(crank.compareTo(crank2) < 0){
-				System.out.println(crank + ">" + crank2);
+				//System.out.println(crank + ">" + crank2);
 				rank++; //預設為第一名，分數小於一人就後退一個名次。
 			 }
 		 }
