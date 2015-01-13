@@ -4,14 +4,15 @@ import java.util.Scanner;
 
 
 public class GradeSystems {
-	static double[] weights=new double[]{0.1,0.1,0.1,0.3,0.4};
-	
+	double[] weights={0.1, 0.1, 0.1, 0.3, 0.4};
 	String[][] alist = new String[100][8];
 	int index=0;
 	
 	public GradeSystems() throws FileNotFoundException {
 		File file = new File("gradeInput.txt");
 		Scanner sc=new Scanner(file);
+		//{0.1,0.1,0.1,0.3,0.4}
+		
 		while(sc.hasNextLine()){
 			String line = sc.nextLine();
 			Scanner sc1=new Scanner(line);
@@ -86,9 +87,17 @@ public class GradeSystems {
 	
 	public void updateWeights (){
 		 showOldWeights() ;
-		 weights=getNewWeights(); 
+		 double[] iweights=new double[5];
+		 iweights=getNewWeights();
+		 weights[0]=iweights[0];
+		 weights[1]=iweights[1];
+		 weights[2]=iweights[2];
+		 weights[3]=iweights[3];
+		 weights[4]=iweights[4];
+		 System.out.println(weights[0]+weights[1]+weights[2]+weights[3]+weights[4]);
 		 for(int i=0; i<index; i++){
 				alist[i][7]=String.valueOf(calculateTotalGrade(weights, alist[index][2], alist[index][3], alist[index][4], alist[index][5], alist[index][6]));
+				System.out.print(alist[i][7]+"  ");
 		 }
 	}
 
@@ -118,13 +127,9 @@ public class GradeSystems {
 			String cmd=sc.next();
 			if(cmd.equalsIgnoreCase("y")){
 				RIGHT=true;
-				return tmpweights;
 			}
 		}
-		return weights;
-		
-		
-		
+		return tmpweights;		
 	}
 
 
