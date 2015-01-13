@@ -13,18 +13,8 @@ public class UI {
 		
 	try {
 		aGradeSystem = new GradeSystems();
-		while (true) {
-			String ID = promptID();
-			if (ID.equals("Q")){
-				showFinishMsg();
-				break;
-			}
-			else if (aGradeSystem.checkID(ID)==true) {
-				showWelcomeMsg();
-				promptCommand();
-			} 
-		}
-				
+		into();
+	
 	} 
 		finally {		}
 }		 
@@ -36,9 +26,9 @@ public class UI {
 		System.out.println("\t\t3) W 更新配分 (Weight)");
 		System.out.println("\t\t4) E 離開選單 (Exit)");
 		
-		cmd=sc.next();
-
-		  switch (cmd.charAt(0)) {
+		while(true){
+			cmd = getCmd();
+			switch (cmd.charAt(0)) {
 				case 'G':
 					aGradeSystem.showGrade(ID);
 				break;
@@ -48,20 +38,23 @@ public class UI {
 				case 'W':
 					aGradeSystem.updateWeights();
 				break;
-				case 'Q':	
+				case 'E':
+					into();
 				default:
 					System.out.println("指令錯了!");
-					promptCommand();
-		  }
-		
+					
+			}
+		}
 	}
 
 	private void showWelcomeMsg() {
-		System.out.println("Welcome "+ aGradeSystem.getcurrentname(ID) + "!");
+		System.out.printf("Welcome %s ! \n",aGradeSystem.getcurrentname(ID));
+		
 	}
 
 	private void showFinishMsg() {
-		System.out.println("結束");	
+		System.out.println("結束了");
+		System.exit(0);
 	}
 	
 	public String promptID() {
@@ -69,6 +62,28 @@ public class UI {
 		String idTmp = sc.next();
 		return idTmp;
 		
+	}
+	
+	public void into() throws NoSuchCommandExceptions {
+		while (true) {
+			 ID = promptID();
+			if (ID.equals("Q")){ 
+				showFinishMsg();
+				break;
+			}
+			else if (aGradeSystem.checkID(ID)==true) {
+				showWelcomeMsg();
+				promptCommand();
+			}else{
+				System.out.println("ID錯了!");
+			}
+		}
+		
+	}
+	
+	public String getCmd(){
+		System.out.printf("\n使用者輸入：");
+		return sc.next();
 	}
 
 }
