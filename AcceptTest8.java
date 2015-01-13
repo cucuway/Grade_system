@@ -23,12 +23,21 @@ public class AcceptTest8 {
 	//加上timeout設定可以防止無限迴圈
 	@Test(timeout=1000)
 	public void testMain() throws IOException {
-		/*TODO
-		 * 自訂測試案例
-		 * 
-		 * 
-		 * 
-		 */
+		//把stdout記錄起來
+		PrintStream stdout = System.out;
+		//設定從鍵盤依序輸入"995002901\n", "G\n", "R\n", "E\n", "Q\n"		
+		ByteArrayInputStream  inContent = new ByteArrayInputStream("995002901\nG\nR\nE\nQ\n". getBytes());
+		System.setIn(inContent);
+		//設定螢螢幕輸出
+		final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(outContent));
+		//執行程式
+		Main.main(null);
+		//把System.out還原，並把結果多印一分到stdout以利Debug
+		System.setOut(stdout);
+		System.out.println(outContent.toString());
+		//比對螢幕輸出	
+		assertThat(outContent.toString(), containsString("舒晨馨排名第40"));
 		
 	}
 	
